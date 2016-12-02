@@ -1,0 +1,98 @@
+Lecture 1 - Welcome
+-----------------------------
+	Examples: database mining
+
+Machine Learning def:
+	1. computers ability to learn w/o being programmged
+	2. learn experience E wrt class of tasks T and measure P 
+		if P(T) improves with E
+
+
+------------------------------
+Supervised Learning
+------------------------------
+How to choose what type of model (learning algorithm)
+- requires right answers to be given
+- discrete vs continuous
+- features - things that affect our choice
+- inifinite of features?
+- categorized as regression (continuous output) and classificaiton (discrete output) problems
+
+------------------------------
+Unsupervised Learning
+------------------------------
+- have no labels, no structure known
+- want to determine the structure
+- simple and few lines of code
+- clusters data based on relationships among the variables
+	in the data
+
+
+------------------------------
+Model Representation
+------------------------------
+m = # of training examples
+x's = input variable / features
+y's = output varaible / target variable
+(x, y) = one training example (row)
+(x ^(i), y ^(i)) = ith training example (row i)
+h - hypothesis - maps from x's to y's (X -> Y)
+	- choose h_theta(x) = theta_0 + theta_1 x
+	- univariante (one variable) linear regression
+
+------------------------------
+Cost Function
+------------------------------
+
+minimize(theta_0, theta_1) 1/2m summation(i=1, m){ h_theta(x^(i)) - y(i)}^2
+	h_theta(x^i) = theta_0 + theta_1 x^i
+
+Squared error function is out cost function denoted by J (theta_0, theta_1)
+
+------------------------------
+Cost Function II
+------------------------------
+- contour plots or figures
+- a bow shaped function that grows out of the screen
+- the minimum of the bow
+
+------------------------------
+Gradient Descent
+------------------------------
+- Start with Theta_0, Theta_1
+	Keep changing to redude J(theta_0, theta_1)
+
+- imagine ona  hill and want to go down hill fast as possible (descent)
+- continously do this until reach (converge) to a local minimum
+
+Algorithm
+	repeat until convergence {
+		theta_j := theta_j - alpha(d / (d theta_j)) J (theta_0, theta_1)
+	}
+	alpha: the learning rate (the size of the step)
+	- requires simultaneous updates for theta_0, theta_1 (using two temp variables) -> more natural
+	-
+
+------------------------------
+Gradient Descent Intuition
+------------------------------
+Derivative Part
+d / (d *theta_j) J(theta_j)
+Learning rate (alpha) 
+	- if too small can be quite slow
+	- if too big may not find the minimum/ fail to converge
+What if at local minimum what will on step of gradiaten descent do?
+	- nothing the derivative is zero
+Gradient descent as approaches local minimum
+	- it naturally takes smaller steps
+
+------------------------------
+Gradient Descent for Linear Regression
+------------------------------
+- apply gradient descent to linear regression
+- can use mutli-variant calculus to create a new convergence equations for linear regression
+- for linear regression it always converges to one answer (due to it being convex function) -> only one global optimal
+- Batch gradient descent -> uses all training examples
+- Uses uses an iterative approach (normal equation non-iterative but doesnt scale as well)
+
+

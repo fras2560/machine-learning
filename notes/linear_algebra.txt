@@ -1,0 +1,12 @@
+---------------------
+Linear Algebra Review
+---------------------
+Matrics & Vectors
+---------------------
+rectangular array of numbers
+Dimension of matrix: # Rows X # Columns
+Aij = i,j entry in ith rows and j column
+
+vector is a special case of a matrix with one column
+upper case for matrix
+lower case for a vector
