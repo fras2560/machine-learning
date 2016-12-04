@@ -1,0 +1,95 @@
+Second Week
+-------------------
+multiple features
+-------------------
+notation:
+	n = # of features
+	x^(i) = input features of ith training example (essentially a row)
+	x^(i)_j = value of feature j in ith training example
+
+
+when n >= 1
+ 	theta_j = theta_j alpha (1/m) sum (i=1, m)[h_theta(x^i) - y^i]x_j^i
+(normally assume x_0^i = 1)
+
+-------------------
+Feature Scaling
+-------------------
+idea: make features are on a similar scale (scaling to common scale)
+	- Uneven scale will put more weight on large scale and slows down gradient descent
+scaling -1 <= xi <= 1 range for all features (want to get close)
+bad examples
+	-100 <= x3 <= 100
+	-0.0001 <= x4 <= 0.0001
+
+Mean Normalization
+	replace xi with xi - ui to make features have approximately zero mean
+	xi = (value - mean) / range = (xi - ui) / s1 
+	-> s1 (max - min) or standard deviation
+
+-------------------
+Learning Rate (alpha)
+-------------------
+Debugging -> how to know gradient descent is working correctly
+	- J(theta) should decrease after every iteration
+	- hard to know the number of iterations it will take
+	- automatic convergence test if J(theta) decreases by less than 10^-3 in one iteration
+	- can just check a graph
+Alpha:
+	if too small: slow covergence
+	if too large: may not converge or J(theta) may not decrease
+
+-------------------
+Features & Polynomial Regression
+-------------------
+Sometimes want to combine features (e.g. area = front * depth)
+Can apply linear regression using polynomial by setting variables
+
+-------------------
+Normal Equation
+-------------------
+Idea: used to solve for theta analytically
+
+How does it work:
+	- For 1d - take the derivative and set it to zero
+	- theta is usualy a vector with n+1 size
+	- take the partical derivative for every variable and set them all to zero
+	- 
+
+X = [
+		1 X_1^i
+		1 X_2^i
+		...
+	]
+Y = [
+		y^1
+		y^2
+		...
+	]
+theta = (X^TX)^-1 X^T y
+
+octave: pinv(X'*X)*X'*y
+
+- no real need for scaling
+
+Gradient Descent 	VS 		Normal Equation
+- need to chooose alpha  |	+ no need to chooise alpha
+- need many iterations	 |	+ dont need to iterate
++ works well for large n |	- slow for large n
+
+-------------------
+Normal Equation Noninvertibility
+-------------------
+What happens when X^T*X when it is not invertiable
+	- pinv doesnt matter since uses psuedo inversion
+Why does it occur?
+	- redundant features -> if two variables are related
+	- too many feautes (m <= n)
+		-> delte features or use regularization
+
+-------------------
+Working & Submitting Assignment
+-------------------
+
+
+
