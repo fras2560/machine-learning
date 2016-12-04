@@ -1,9 +1,0 @@
-Second Week
--------------------
-multiple features
--------------------
-notation:
-	n = # of features
-	x^(i) = input features of ith training example (essentially a row)
-	x^(i)_j = value of feature j in ith training example
-
