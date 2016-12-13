@@ -1,0 +1,126 @@
+-----------------
+Octave Tutorial - Basic Operations
+-----------------
+Often prototype in octave and then re-implement in other language
+most prototype language: Octave, Matlab, Python, R
+
+~ is the not symbol
+&& is 'and' operator
+|| is 'or' operator
+; suppresses output
+disp -> print command
+disp(sprintf()) -> for printing strings
+example disp(sprintf(' 2 decimals: %0.2f', a))
+format long and short
+; in columns means a new row
+v = 1:0.1:2
+	START:STEP:END -> create a vector starting at START STEPPING UNTIL END
+ones(2, 3) matrix of ones
+zeros(1, 3)
+rand(1, 3) matrix of values 
+all above (rows, columns)
+hist - creates a histogram
+randn() creates a vector normal distribution
+eye(4) - identity matrix for for 4 X 4
+
+-----------------
+Moving Data Around
+-----------------
+size -> tells you a size of a matrix; returns a vector of the matrix
+size(MATRIX, n) -> get lenght of matrix for nth dimension
+length -> used for vectors primiarily
+Uses most of the linux commands ls, pwd, cd etc..
+
+How to load data
+load file or load('FILENAME')
+
+who -> shows variables in scope
+whos -> shows with details
+
+clear (variable) to remove variable(s)
+
+save FILENAME VARIABLE; -> save variables
+
+save FILENAME VARIABLE -ascii -> to save as text
+A(row, column) to index
+A(2,:) -> : means every element along that row/column second row
+A(:,2) -> second column
+A([1 3], :) -> all columns but only first and third row
+	-> above can be used for assigning as well
+	-> can be used to be append to a vector or matrix
+A(:) -> used to make a sinle vector form a matrix
+C = [A B] concat them together (two matrixes)
+C = [A; B] puts A & B together but A on top
+
+-----------------
+Computing on Data
+-----------------
+.* - dot element wise operation
+.^2 - squares all elements
+1 ./ v inverts each element
+' transpose matrix
+[val, ind] = max(V)
+magic -> matrix squares that all rows and columns sum up to the same thing (sudoku like)
+max(A,[],1) -> max or each column
+max(A,[],2) -> max of each row
+
+-----------------
+Plotting Data
+-----------------
+plot(x, y)
+plot(x, y, 'r') plot a r graph
+xlabel('') -> change x label
+ylabel('')  -> change y label
+legend('y1','y2') -> anme different plots
+title('TITLE')
+print -dpng 'FILENAME' -> save plot
+hold on; -> for multiple plotting
+close => close figure
+subplot(1,2,1) -> divides plot 1X2 grid, access first element
+# good for plotting things side by side
+axis([X1 X2 Y1 Y2]) change axis ranges
+imagesc(A) plot matrix by a grid of colors
+imagesc(A), colorbat, colormap gray;
+
+-----------------
+Control Statements
+-----------------
+for i=1:10,
+	# LOOP
+end;
+
+indices =1:10;
+for i=indices
+	#LOOP
+end;
+
+i=1;
+while i <= 5,
+	#LOOP
+	i = i +1;
+end;
+
+-----------------
+Vectorization
+-----------------
+h_theta(x)  = sum(j=0, h) theta_jx_j (need a for loop for unvectorized implementation)
+			= theta'x (vectorized implementation)
+
+
+Gradient descent example
+	vectorized: theta = theta - alpha delta
+					where delta = 1/m sum(i=1, m) (h_theta(x^(i))-y^(i))X^(i)
+
+Quiz
+	Attempt 2
+	1) A && B
+	2) A && B
+	3) None checked - X
+	4) None checked - X
+	5) A && B && C
+	Attempt 3
+	1) A && B
+	2) A && B
+	3) A
+	4) A && B
+	5) A && B && C

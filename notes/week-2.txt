@@ -1,0 +1,121 @@
+--------------------------
+Week 2 - Classification, Logitstic Regression
+--------------------------
+Classification
+--------------------------
+examples email- spam or not
+Dont use regression since puts too much emphasis on outliers and doesnt work the best
+
+--------------------------
+Hypothesis Representation
+--------------------------
+Want classifier to output hypothesis between 0 and 1
+h_theta(x) = g(theta^T x)
+	h(z) = 1 / (1 + e ^ -z)
+
+Also known as a sigmoid function with asymptotes of zero and 1
+
+--------------------------
+Decision Boundary
+--------------------------
+is the line seperating the two regions
+
+
+--------------------------
+Cost Function
+--------------------------
+Cost(h_theta(x), y) = 1/2 (h_theta(x) - y) ^2 (linear regression)
+would be non-convex (line that has bunch of local minimums)
+but we want a convex (only one local minimum)
+curve the similar to -log function
+get two curves who are opposite and cross at one point
+
+--------------------------
+Simplified Cost function
+--------------------------
+not much
+
+--------------------------
+Advanced Optimization
+--------------------------
+more than just gradient descent
+- conjugate gradient
+- BFGS
+- L-BFGS
+cost function  07:00 (code example)
+
+--------------------------
+Multiclass Classification
+--------------------------
+weather - sunny, cloudy, rain, snow
+
+one-vs-all - turn each feature into two sets sets (pair between each feature)
+	- then train just like we did before
+	- repeate for each class
+
+Quiz
+	Attempt I:
+		1: A, B
+		2: C - X
+		3: A, B
+		4: A, B, C - X
+		5: B - X
+
+	Attempt II:
+		1: C, D
+		2: A
+		3: C, D
+		4: A, C The cost function J(θ) for logistic regression trained with m≥1 examples is always greater than or equal to zero. The sigmoid function g(z)=11+e−z is never greater than one (>1). 
+		5:
+
+--------------------------
+Problem of Overfitting
+--------------------------
+underfiting - high bias
+overfiting - high variance (fail to generalize)
+Way to approach
+1. Reduce # of features
+2. Regularization
+
+--------------------------
+Cost function
+--------------------------
+Suppose we penalize and make theta_3 and theta_4 really small
+ - simpler hypothesis and less prone to overfitting
+ - modify cost function to have a term lamda sum(theta_j^2)
+
+--------------------------
+Regularized Linear Regression
+--------------------------
+Do not penalize theta_0
+
+--------------------------
+Regularized Logistic Regression
+--------------------------
+
+Quiz II
+	Attempt I:
+		1:
+			You are training a classification model with logistic
+			regression. Which of the following statements are true? Check
+			all that apply.
+
+			\/ - Adding many new features to the model makes it more likely to overfit the training set.
+
+			Introducing regularization to the model always results in equal or better performance on the training set.
+
+			\/ - Introducing regularization to the model always results in equal or better performance on examples not in the training set.
+
+			Adding a new feature to the model always results in equal or better performance on examples not in the training set. 
+		2: Bigger one
+		3:
+			Because logistic regression outputs values 0≤hθ(x)≤1, its range of output values can only be "shrunk" slightly by regularization anyway, so regularization is generally not helpful for it.
+
+			Using a very large value of λ cannot hurt the performance of your hypothesis; the only reason we do not set λ to be too large is to avoid numerical problems.
+
+			Because regularization causes J(θ) to no longer be convex, gradient descent may not always converge to the global minimum (when λ>0, and when using an appropriate learning rate α).
+
+			\/ - Using too large a value of λ can cause your hypothesis to underfit the data.
+
+	Attempt II:
+
