@@ -1,0 +1,104 @@
+---------------------------
+Week 3
+---------------------------
+Non-linear Hypotheses
+---------------------------
+can have an explosion of variables for non-linear classfication
+o(n^2) - include all pairs (x1x2 x1xn)
+o(n^3) - include all triples (x1x2x3, x1x2xn)
+then have to use less features but then cant do as much
+---------------------------
+Neurons and the Brain
+---------------------------
+"one learning algorithm"
+	- there is one learning algorithm to learn see, touch , sound
+Can we figure out the brain learning algorithm
+
+
+---------------------------
+Model Representation
+---------------------------
+Neuron - is a computation input
+	-takes inputs from dendrite and outputs in axon
+	- almost like thhousand of cpu connected
+	- sensors and muscles work as well
+
+Neuron Model
+	- x1 x2 x3 -> H_theta(x)
+	- xo - bias unit
+Neural Netwrok
+	- just a group of the networks connected
+	- layer 1 - input layer
+	- layer 3 (final) - output layer
+	- layer 2 - hidden layer
+	a_i^(j) = activation of unit i in layer j
+	theta^(j) = matrix of weights controlling function mapping from layer j to layer j+1
+	theta^(j) = s_(j+1) X (s_j + 1)
+
+---------------------------
+Model Representation II
+---------------------------
+Vectorized Implementation
+What are the doing?
+	- how does it learn its own features?
+	- learns its own features and can learn based on theta_1
+	- much more flexibility by learning whatever it wants
+How they are connected is the architectures
+
+---------------------------
+Examples and Intuitions I
+---------------------------
+- provides a logical AND (x1, x2)
+
+---------------------------
+Examples and Intuitions II
+---------------------------
+
+---------------------------
+Multiclass Classification
+---------------------------
+output is a vector with many units
+
+Quiz
+
+ Which of the following statements are true? Check all that apply.
+
+	Suppose you have a multi-class classification problem with three classes, trained with a 3 layer network. Let a1(3)=(hΘ(x))1 be the activation of the first output unit, and similarly a2(3)=(hΘ(x))2 and a3(3)=(hΘ(x))3. Then for any input x, it must be the case that a1(3)+a2(3)+a3(3)=1.
+
+	The activation values of the hidden units in a neural network, with the sigmoid activation function applied at every layer, are always in the range (0, 1).
+
+	X - Any logical function over binary-valued (0 or 1) inputs x1 and x2 can be (approximately) represented using some neural network.
+
+	X - A two layer (one input layer, one output layer; no hidden layer) neural network can represent the XOR function. 
+
+ Consider the following neural network which takes two binary-valued inputs x1,x2∈{0,1} and outputs hΘ(x). Which of the following logical functions does it (approximately) compute?
+
+	X - NAND (meaning "NOT AND")
+
+	AND
+
+	OR
+
+	XOR (exclusive OR)
+
+Consider the neural network given below. Which of the following equations correctly computes the activation a1(3)? Note: g(z) is the sigmoid activation function.
+
+	X - a1(3)=g(Θ1,0(2)a0(2)+Θ1,1(2)a1(2)+Θ1,2(2)a2(2))
+
+	a1(3)=g(Θ1,0(2)a0(1)+Θ1,1(2)a1(1)+Θ1,2(2)a2(1))
+
+	a1(3)=g(Θ1,0(1)a0(2)+Θ1,1(1)a1(2)+Θ1,2(1)a2(2))
+
+	a1(3)=g(Θ2,0(2)a0(2)+Θ2,1(2)a1(2)+Θ2,2(2)a2(2))
+
+You'd like to compute the activations of the hidden layer a(2)∈R3. One way to do so is the following Octave code:
+
+You want to have a vectorized implementation of this (i.e., one that does not use for loops). Which of the following implementations correctly compute a(2)? Check all that apply.
+
+	X - z = Theta1 * x; a2 = sigmoid (z);
+
+	X - a2 = sigmoid (x * Theta1);
+
+	a2 = sigmoid (Theta2 * x);
+
+	z = sigmoid(x); a2 = sigmoid (Theta1 * z);
