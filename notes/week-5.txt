@@ -1,0 +1,105 @@
+-------------------
+Week 5
+-------------------
+L = # of layers
+s_l # of units in layer l
+
+Neural network cost function
+ - similar to logitic just another layer K summation
+
+-------------------
+Backpropagation Algorithm
+-------------------
+Intuition error of node j in layer l
+calculated in reverse (end to start)
+no delta 1 term (since just input)
+triangle^l = triangle^l = delta^(l+1) transpose(a^l)
+
+-------------------
+Backpropagation Intuition
+-------------------
+
+-------------------
+Unrolling Parameters
+-------------------
+thetaVec = [Theta1(:); Theta2(:); ...]
+unroll them into one long vector
+
+Theta1 = reshape(thetaVec(1:110), 10, 11);
+to unroll 10 & 11 are the rows/columns
+
+-------------------
+Gradient Checking
+-------------------
+-used for testing implementations
+-one side vs two sided difference
+-used to check gradient checking used to check back prop is working properly
+
+-------------------
+Random Initialization
+-------------------
+- can use zero initialization but suffers from symmetry issues
+
+-------------------
+Putting it Together
+-------------------
+y should be a vector (one column)
+- should have a for loop
+- J(theta) is non-convex
+
+
+Quiz 1
+	You are training a three layer neural network and would like to use backpropagation to compute the gradient of the cost function. In the backpropagation algorithm, one of the steps is to update
+
+	Δ(2)ij:=Δ(2)ij+δ(3)i∗(a(2))j
+	for every i,j. Which of the following is a correct vectorization of this step?
+
+	X -	Δ(2):=Δ(2)+δ(3)∗(a(2))T
+
+		Δ(2):=Δ(2)+(a(2))T∗δ(3)
+
+		Δ(2):=Δ(2)+(a(3))T∗δ(2)
+
+		Δ(2):=Δ(2)+δ(3)∗(a(3))T
+
+	Wrong - Suppose Theta1 is a 5x3 matrix, and Theta2 is a 4x6 matrix. You set thetaVec=[Theta1(:);Theta2(:)]. Which of the following correctly recovers Theta2?
+
+		X - reshape(thetaVec(16:39),4,6)
+
+		reshape(thetaVec(15:38),4,6)
+
+		reshape(thetaVec(16:24),4,6)
+
+		reshape(thetaVec(15:39),4,6)
+
+		reshape(thetaVec(16:39),6,4)
+
+	Let J(θ)=3θ3+2. Let θ=1, and ϵ=0.01. Use the formula J(θ+ϵ)−J(θ−ϵ)2ϵ to numerically compute an approximation to the derivative at θ=1. What value do you get? (When θ=1, the true/exact derivative is dJ(θ)dθ=9.)
+
+		9
+
+		8.9997
+
+		X - 9.0003
+
+		11
+
+	Which of the following statements are true? Check all that apply.
+
+		Gradient checking is useful if we are using one of the advanced optimization methods (such as in fminunc) as our optimization algorithm. However, it serves little purpose if we are using gradient descent.
+
+		Computing the gradient of the cost function in a neural network has the same efficiency when we use backpropagation or when we numerically compute it using the method of gradient checking.
+
+		X - Using gradient checking can help verify if one's implementation of backpropagation is bug-free.
+
+		X - For computational efficiency, after we have performed gradient checking to verify that our backpropagation code is correct, we usually disable gradient checking before using backpropagation to train the network.
+
+	Which of the following statements are true? Check all that apply.
+
+		Suppose that the parameter Θ(1) is a square matrix (meaning the number of rows equals the number of columns). If we replace Θ(1) with its transpose (Θ(1))T, then we have not changed the function that the network is computing.
+
+		X - If we are training a neural network using gradient descent, one reasonable "debugging" step to make sure it is working is to plot J(Θ) as a function of the number of iterations, and make sure it is decreasing (or at least non-increasing) after each iteration.
+
+		Suppose we are using gradient descent with learning rate α. For logistic regression and linear regression, J(θ) was a convex optimization problem and thus we did not want to choose a learning rate α that is too large. For a neural network however, J(Θ) may not be convex, and thus choosing a very large value of α can only speed up convergence.
+
+		X - Suppose we have a correct implementation of backpropagation, and are training a neural network using gradient descent. Suppose we plot J(Θ) as a function of the number of iterations, and find that it is increasing rather than decreasing. One possible cause of this is that the learning rate α is too large.
