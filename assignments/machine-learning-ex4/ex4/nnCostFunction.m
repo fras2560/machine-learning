@@ -62,23 +62,22 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% transform ys to vectors 
+ys = zeros(num_labels, m);
+for i = 1:num_labels
+	ys(i,:) = (y == i);
+end
+y = ys;
 
+% feedforward 
+a_1 = [ones(1, m); tranpose(X)];
+z_2 = Theta1 * a_1;
+a_2 = [ones(1, m); sigmoid(z_2)];
+z_3 = Theta2 * a_2;
+a_3 = sigmoid(z_3);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% computation
+J = (1/m) * sum(sum(-y .* log(a3) - (1 - y) .* log(a3)));
 
 % -------------------------------------------------------------
 
