@@ -62,6 +62,7 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+
 % transform ys to vectors 
 ys = zeros(num_labels, m);
 for i = 1:num_labels
@@ -70,14 +71,43 @@ end
 y = ys;
 
 % feedforward 
-a_1 = [ones(1, m); tranpose(X)];
+a_1 = [ones(1, m); transpose(X)];
 z_2 = Theta1 * a_1;
 a_2 = [ones(1, m); sigmoid(z_2)];
 z_3 = Theta2 * a_2;
 a_3 = sigmoid(z_3);
 
 % computation
-J = (1/m) * sum(sum(-y .* log(a3) - (1 - y) .* log(a3)));
+J = (1/m) * sum(sum(-y .* log(a_3) - (1 - y) .* log(1 - a_3)));
+regularize = lambda / (2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+J = J + regularize;
+
+% compute deltas
+for t=1:m
+	% forward
+	a_1 = [1; transpose(X(t,:))];
+	z_2 = Theta1 * a_1;
+	a_2 = [1; sigmoid(z_2)];
+	z_3 = Theta2 * a_2;
+	a_3 = sigmoid(z_3);
+	
+	% now backward
+	delta_3 = a_3 - y(:,t);
+	z_2 = [1 ; z_2];
+	delta_2 = transpose(Theta2) * delta_3 .* sigmoidGradient(z_2);
+	delta_2 = delta_2(2:end);
+	% thetas
+	Theta2_grad = (Theta2_grad + delta_3 * transpose(a_2));
+	Theta1_grad = (Theta1_grad + delta_2 * transpose(a_1));
+end
+
+% Implement for Theta1 and Theta2 when l = 0
+Theta1_grad(:,1) = Theta1_grad(:,1)./m;
+Theta2_grad(:,1) = Theta2_grad(:,1)./m;
+
+% Implement for Theta1 and Theta 2 when l > 0
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end)./m + ( (lambda/m) * Theta1(:,2:end) );
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end)./m + ( (lambda/m) * Theta2(:,2:end) );
 
 % -------------------------------------------------------------
 
