@@ -1,0 +1,246 @@
+-------------------------------------------
+Week 6
+-------------------------------------------
+	Things to try:
+		- get more training examples
+		- try smaller sets of features
+		- try getting additional features
+		- try adding polynomial features
+		- try decreasing lambda
+		- try increasing lambda
+
+	How to eliminate options:
+		- machine learning diagnostic - (take time to implement)
+
+-------------------------------------------
+Evaluating a Hypothesis
+-------------------------------------------
+	splitting into a training and testing set
+
+	Testing/Training Procedure
+		- learn parameter theta
+		- compute test set error
+	error = 1 / mTest sum(err h_theta(x_test ^ i), y_test^i)
+	# number of tests misclassified
+
+-------------------------------------------
+Model Selection & Train/Validation/Test Sets
+-------------------------------------------
+	do a bunch of polynomials with increasing degree
+	while checking test set error
+	BUT this is just setting parameter d to the test set
+	which means is probably does not generalize
+
+	Use a cross validation error -> use to estimate d degree
+	Training Error
+	Test Error -> used to test the data
+
+-------------------------------------------
+Diagnosing Bias vs. Variance
+-------------------------------------------
+	shitty models usually from bias or variance data
+		- want to balance the two
+		- bias is high error in Jcv and Jtrain
+		- variance is Jcv is high but Jtrain is low Jcv >> Jtrain
+
+
+-------------------------------------------
+Regularizayion and Bias/Variance
+-------------------------------------------
+	- when using regularizayion, change the Jtrain are the average square error without the regularization term
+	- now try with different values of lambda
+	- now can examine cross validation set
+
+-------------------------------------------
+Learning curves
+-------------------------------------------
+	- m : training set size (> 3) 
+	- small training set means small training error
+	- as m grows the average error (training) grows
+	- the opposite is true for cross validation
+	- want to pick the optimal point the balances the two graphs
+	high bias : very small gap
+	high variance : huge gap
+
+-------------------------------------------
+Deciding What to Do Next Revisited
+-------------------------------------------
+	get more trainiing examples 	-> fixes high variance
+	try smaller sets of features 	-> fixes high variance
+	try getting addition features 	-> fixes high bias
+	try adding polynomial features	-> fixes high bias
+	try decreasing lambda			-> fixes high bias
+	try increasing lambda			-> fixes high variance
+	small vs large neural networks
+	underfitting vs overfitting
+	computation cheap vs expensive computation
+
+
+Quiz
+1.
+	You train a learning algorithm, and find that it has unacceptably high error on the test set. You plot the learning curve, and obtain the figure below. Is the algorithm suffering from high bias, high variance, or neither?
+
+		-> High bias
+
+		Neither
+
+		High variance	
+
+2. X
+	Suppose you have implemented regularized logistic regression
+
+	to classify what object is in an image (i.e., to do object
+
+	recognition). However, when you test your hypothesis on a new
+
+	set of images, you find that it makes unacceptably large
+
+	errors with its predictions on the new images. However, your
+
+	hypothesis performs well (has low error) on the
+
+	training set. Which of the following are promising steps to
+
+	take? Check all that apply. (high bias)
+
+		Try increasing the regularization parameter λ.
+
+		Try evaluating the hypothesis on a cross validation set rather than the test set.
+
+		-> Try decreasing the regularization parameter λ.
+
+		Try using a smaller set of features.
+
+3. X
+	Suppose you have implemented regularized logistic regression
+
+	to predict what items customers will purchase on a web
+
+	shopping site. However, when you test your hypothesis on a new
+
+	set of customers, you find that it makes unacceptably large
+
+	errors in its predictions. Furthermore, the hypothesis
+
+	performs poorly on the training set. Which of the
+
+	following might be promising steps to take? Check all that
+
+	apply.
+
+		Try to obtain and use additional features.
+
+		-> Try increasing the regularization parameter λ.
+
+		Try adding polynomial features.
+
+		-> Try using a smaller set of features.
+
+4. 
+
+	Which of the following statements are true? Check all that apply.
+
+		Suppose you are training a regularized linear regression model. The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest test set error.
+
+		-> The performance of a learning algorithm on the training set will typically be better than its performance on the test set.
+
+		-> Suppose you are training a regularized linear regression model. The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest cross validation error.
+
+		Suppose you are training a regularized linear regression model.The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest training set error. 
+
+5. X
+
+	Which of the following statements are true? Check all that apply.
+
+		-> When debugging learning algorithms, it is useful to plot a learning curve to understand if there is a high bias or high variance problem.
+
+		-> A model with more parameters is more prone to overfitting and typically has higher variance.
+
+		If a learning algorithm is suffering from high bias, only adding more training examples may not improve the test error significantly.
+
+		-> If a neural network has much lower training error than test error, then adding more layers will help bring the test error down because we can fit the test set better.
+
+-----------------------------------------------------------------------
+1.
+	You train a learning algorithm, and find that it has unacceptably high error on the test set. You plot the learning curve, and obtain the figure below. Is the algorithm suffering from high bias, high variance, or neither?
+	Big Gap
+
+		Neither
+
+		High bias
+
+		->High variance
+
+2. X
+		Suppose you have implemented regularized logistic regression
+
+	to classify what object is in an image (i.e., to do object
+
+	recognition). However, when you test your hypothesis on a new
+
+	set of images, you find that it makes unacceptably large
+
+	errors with its predictions on the new images. However, your
+
+	hypothesis performs well (has low error) on the
+
+	training set. Which of the following are promising steps to
+
+	take? Check all that apply. High variance
+		-> Try evaluating the hypothesis on a cross validation set rather than the test set.
+
+		-> Try increasing the regularization parameter λ.
+
+		-> Try using a smaller set of features.
+
+		Try decreasing the regularization parameter λ.
+
+3.
+
+	Suppose you have implemented regularized logistic regression
+
+	to predict what items customers will purchase on a web
+
+	shopping site. However, when you test your hypothesis on a new
+
+	set of customers, you find that it makes unacceptably large
+
+	errors in its predictions. Furthermore, the hypothesis
+
+	performs poorly on the training set. Which of the
+
+	following might be promising steps to take? Check all that
+
+	apply. (High Bias)
+
+		-> Try adding polynomial features.
+
+		Use fewer training examples.
+
+		-> Try decreasing the regularization parameter λ.
+
+		Try evaluating the hypothesis on a cross validation set rather than the test set.
+
+4. 
+
+	Which of the following statements are true? Check all that apply.
+
+		Suppose you are training a regularized linear regression model. The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest test set error.
+
+		-> The performance of a learning algorithm on the training set will typically be better than its performance on the test set.
+
+		-> Suppose you are training a regularized linear regression model. The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest cross validation error.
+
+		Suppose you are training a regularized linear regression model.The recommended way to choose what value of regularization parameter λ to use is to choose the value of λ which gives the lowest training set error. 
+
+5.
+
+	Which of the following statements are true? Check all that apply.
+
+		-> A model with more parameters is more prone to overfitting and typically has higher variance.
+
+		If a neural network has much lower training error than test error, then adding more layers will help bring the test error down because we can fit the test set better.
+
+		-> If a learning algorithm is suffering from high bias, only adding more training examples may not improve the test error significantly.
+
+		-> When debugging learning algorithms, it is useful to plot a learning curve to understand if there is a high bias or high variance problem.
