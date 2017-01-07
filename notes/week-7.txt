@@ -1,0 +1,190 @@
+---------------------------------------------------------------
+week-7
+---------------------------------------------------------------
+Optimization Objective
+---------------------------------------------------------------
+Imagine logistc equation but slightly modified
+cost_1(z) - when y=1
+cost_0(z) - when y = 0
+replace -log h_theta x^i with cost_1(theta'x^i) 
+replace -log (1 - h_theta x^i) cost_0(theta'x^i)
+
+---------------------------------------------------------------
+Large Margin Intuition
+---------------------------------------------------------------
+there is a large margin in the unknoen area
+If y = 1, we want theta'x >= 1
+If y = 0, we want theta'x <= -1
+
+---------------------------------------------------------------
+Mathematics Behind Large Margin Intuition
+---------------------------------------------------------------
+Vector Inner Product
+u = [u1; u2], v = [v1; v2]
+u'v = ? (inner product)
+||u|| (norm of u)
+||u|| = length of vector u
+||u|| = sqrt(u1^2 + u2^2)
+p = length of the projection on v on u
+u'v = p * ||u||
+p can be less than zero if (angle between v and u is greater than 90)
+
+
+SVM Decision Boundary
+	min 1/2 sum(theta_j^2) which simplifies to
+	1/2||theta||^2
+
+---------------------------------------------------------------
+Kernels I
+---------------------------------------------------------------
+What the hell are kernels?
+Gaussian Kernel
+	similarity(x, l^i) = exp(- ||x - l^i||^2 / (2 sigma ^2))
+
+small Sigma -> tightens the area of acceptability
+large sigma -> widens ...
+alot of software packages use kernels
+
+Large C: lower bias, high variance
+Small C: Higher bias, low variance
+Sigma^2: 	large   -> higher bias, lower variance, smooth
+			smaller -> lower bias, higher variance, less smooth
+
+Large Value of C overfitting
+Low Value of C underfitting
+---------------------------------------------------------------
+Using An SVM
+---------------------------------------------------------------
+may need to implement a similarity function
+f = kernel(x1, x2) -> need to satisfy Mercer's Theorem to make sure it diverges
+
+* do not scale features before using Gaussian Kernel
+
+Most likely to use linear or non-linear
+
+neural networks work well for most but may be slower to train
+
+
+---------------------------------------------------------------
+Quiz
+---------------------------------------------------------------
+1. X
+ 	Suppose you have trained an SVM classifier with a Gaussian kernel, and it learned the following decision boundary on the training set:
+	You suspect that the SVM is underfitting your dataset. Should you try increasing or decreasing C? Increasing or decreasing σ2?
+
+	It would be reasonable to try increasing C. It would also be reasonable to try decreasing σ2.
+
+	It would be reasonable to try decreasing C. It would also be reasonable to try decreasing σ2.
+
+	It would be reasonable to try increasing C. It would also be reasonable to try increasing σ2.
+
+	-> It would be reasonable to try decreasing C. It would also be reasonable to try increasing σ2.
+
+2. X Decrease σ2 will make the bump more smooth
+	This will make it more pointy
+	Increasing it will smooth it out
+
+3.
+
+	The SVM solves
+	minθ C∑i=1my(i)cost1(θTx(i))+(1−y(i))cost0(θTx(i))+∑j=1nθj2
+	where the functions cost0(z) and cost1(z) look like this:
+	The first term in the objective is:
+	C∑i=1my(i)cost1(θTx(i))+(1−y(i))cost0(θTx(i)).
+	This first term will be zero if two of the following four conditions hold true. Which are the two conditions that would guarantee that this term equals zero?
+
+	For every example with y(i)=1, we have that θTx(i)≥0.
+
+	For every example with y(i)=0, we have that θTx(i)≤0.
+
+	-> For every example with y(i)=1, we have that θTx(i)≥1.
+
+	-> For every example with y(i)=0, we have that θTx(i)≤−1.
+
+4.
+	 Suppose you have a dataset with n = 10 features and m = 5000 examples.
+	After training your logistic regression classifier with gradient descent, you find that it has underfit the training set and does not achieve the desired performance on the training or cross validation sets.
+	Which of the following might be promising steps to take? Check all that apply.
+
+	-> Create / add new polynomial features.
+
+	Use a different optimization method since using gradient descent to train logistic regression might result in a local minimum.
+
+	Reduce the number of examples in the training set.
+
+	-> Try using a neural network with a large number of hidden units.
+
+5.  X
+ Which of the following statements are true? Check all that apply.
+
+	=> If the data are linearly separable, an SVM using a linear kernel will
+	return the same parameters θ regardless of the chosen value of
+	C (i.e., the resulting value of θ does not depend on C).
+
+	-> The maximum value of the Gaussian kernel (i.e., sim(x,l(1))) is 1.
+
+	Suppose you have 2D input examples (ie, x(i)∈R2). The decision boundary of the SVM (with the linear kernel) is a straight line.
+
+	If you are training multi-class SVMs with the one-vs-all method, it is
+	not possible to use a kernel.
+
+
+1.
+	 Suppose you have trained an SVM classifier with a Gaussian kernel, and it learned the following decision boundary on the training set:
+
+	You suspect that the SVM is underfitting your dataset. Should you try increasing or decreasing C? Increasing or decreasing σ2?
+
+		It would be reasonable to try decreasing C. It would also be reasonable to try decreasing σ2.
+
+		-> It would be reasonable to try increasing C. It would also be reasonable to try decreasing σ2.
+
+		It would be reasonable to try decreasing C. It would also be reasonable to try increasing σ2.
+
+		It would be reasonable to try increasing C. It would also be reasonable to try increasing σ2.
+
+2.
+	Same as above
+
+3. X
+	The SVM solves
+	minθ C∑i=1my(i)cost1(θTx(i))+(1−y(i))cost0(θTx(i))+∑j=1nθj2
+	where the functions cost0(z) and cost1(z) look like this:
+	The first term in the objective is:
+	C∑i=1my(i)cost1(θTx(i))+(1−y(i))cost0(θTx(i)).
+	This first term will be zero if two of the following four conditions hold true. Which are the two conditions that would guarantee that this term equals zero?
+
+		->For every example with y(i)=0, we have that θTx(i)≤−1.
+
+		->For every example with y(i)=1, we have that θTx(i)≥1.
+
+		For every example with y(i)=0, we have that θTx(i)≤0.
+
+		For every example with y(i)=1, we have that θTx(i)≥0.
+
+4.
+	 Suppose you have a dataset with n = 10 features and m = 5000 examples.
+	After training your logistic regression classifier with gradient descent, you find that it has underfit the training set and does not achieve the desired performance on the training or cross validation sets.
+	Which of the following might be promising steps to take? Check all that apply.
+
+	-> Use an SVM with a Gaussian Kernel.
+
+	Use an SVM with a linear kernel, without introducing new features.
+
+	-> Create / add new polynomial features.
+
+	Increase the regularization parameter λ. (Decreasing C)
+
+5. X
+ Which of the following statements are true? Check all that apply.
+
+	->If the data are linearly separable, an SVM using a linear kernel will
+	return the same parameters θ regardless of the chosen value of
+	C (i.e., the resulting value of θ does not depend on C).
+
+	The maximum value of the Gaussian kernel (i.e., sim(x,l(1))) is 1.
+
+	-> Suppose you are using SVMs to do multi-class classification and
+	would like to use the one-vs-all approach. If you have K different
+	classes, you will train K - 1 different SVMs.
+
+	It is important to perform feature normalization before using the Gaussian kernel. (wrong)
