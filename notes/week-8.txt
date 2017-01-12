@@ -1,0 +1,122 @@
+--------------------------------------------------------
+Week 8 
+--------------------------------------------------------
+Motivation I: Data Compression
+--------------------------------------------------------
+		- variables that are correlated dont really need all of them
+
+	Question:
+		Suppose we apply dimensionality reduction to a dataset of m examples {x1, x2, ..., xm}, where xu E Rn. As a result of this, we will get out:
+
+			A lower dimensional dataset {z1,z2,...,zm} of m examples where zi E Rk for some values of k and k<=n
+
+--------------------------------------------------------
+Motivation II: Visualization
+--------------------------------------------------------
+	
+	Question:
+		Suppose you have a dataset {x1, x2,..., xm} where xi E Rn. In order to visualize it, we apply dimensionality reduction adn get {z1,z2,...,zm} where zi E Rk is k-dimensional. In a typical setting, which of the following would you expect to be true?
+
+		k <= n
+		k = 2 or k=3
+
+--------------------------------------------------------
+Principal Component Analysis Problem Formulation
+--------------------------------------------------------
+PCA is not linear regression
+	-> tries to magnitude the angles at a distance instead of a straight line (balances the two variables - no y variable)
+
+--------------------------------------------------------
+Principal Component Analysis Algorithm
+--------------------------------------------------------
+	Reduce data from 2D to 1D
+	svd() function to compute eigenvectors
+	Xi * Xi^T is a nxn matrix and can use svd on since meets a criteria
+	Should do feature scaling
+
+	Question
+		In PCA. we obtain z E Rk from X E Rn as follows.
+		Which of the following is a correct expression for zj?
+		zj = (u^j)^Tx
+
+--------------------------------------------------------
+Reconstruction from Compressed Representation
+--------------------------------------------------------
+
+Question
+	Suppose we run PCA with k=n, so that the dimension of the data is not reduced at all. Recall that the percent l fraction variance retained is given by: sum i,k (Sii) / sumi,n(Sii).  Which of the following will be true?
+		U_reduce will be an n x n matrix
+		x_approx = x for every example
+		The percentage of variacne retained will be 100%
+
+--------------------------------------------------------
+Choosing the Number of Principal Components
+--------------------------------------------------------
+	choose k to be smallest value so that 99% of variance is retained
+
+	Question
+		Previously, we said that PCA chooses a direciton u^1 (or k direction u^1, ..., u^k) onto which to project the data so as to minimize the (squared) projection error. Another way to say the same is that PCA tries to minimize:
+
+		1/m sum i=1, m ||x^i - x_approx ^ i||^2	
+
+--------------------------------------------------------
+Advice for Applying PCA
+--------------------------------------------------------
+	Most common used to speedup learning
+	use it on trest set to get your values parameters
+	Does not prevent overfitting
+	Dont use PCA unless you have a readon
+
+	Which of the following are good/ recommended applications of PCA?
+		To compress the data so it takes up less computer memory / disk space
+		To reduce the dimension of the input data so as to speed up a learning algorithm
+		To visualize high-dimensional data (by choosing k=2 || k=3)
+
+
+Quiz
+1. Just checked all
+
+2.
+	Which of the following is a reasonable way to select the number of principal components k?
+	(Recall that n is the dimensionality of the input data and m is the number of input examples.)
+
+		Use the elbow method.
+
+		-> Choose k to be the smallest value so that at least 99% of the variance is retained.
+
+		Choose k to be 99% of m (i.e., k=0.99∗m, rounded to the nearest integer).
+
+		Choose k to be the largest value so that at least 99% of the variance is retained
+
+3.
+	Suppose someone tells you that they ran PCA in such a way that "95% of the variance was retained." What is an equivalent statement to this?
+
+		1m∑i=1m||x(i)||21m∑i=1m||x(i)−xapprox(i)||2≥0.05
+
+		-> 1m∑i=1m||x(i)−xapprox(i)||21m∑i=1m||x(i)||2≤0.05
+
+		1m∑i=1m||x(i)||21m∑i=1m||x(i)−xapprox(i)||2≤0.95
+
+		1m∑i=1m||x(i)||21m∑i=1m||x(i)−xapprox(i)||2≤0.05
+
+4.
+	Which of the following statements are true? Check all that apply.
+
+		Feature scaling is not useful for PCA, since the eigenvector calculation (such as using Octave's svd(Sigma) routine) takes care of this automatically. (False)
+
+		-> Given an input x∈Rn, PCA compresses it to a lower-dimensional vector z∈Rk.
+
+		->If the input features are on very different scales, it is a good idea to perform feature scaling before applying PCA.
+
+		PCA can be used only to reduce the dimensionality of data by 1 (such as 3D to 2D, or 2D to 1D).
+
+5.
+	Which of the following are recommended applications of PCA? Select all that apply.
+
+		To get more features to feed into a learning algorithm.
+
+		-> Data compression: Reduce the dimension of your data, so that it takes up less memory / disk space.
+
+		-> Data visualization: Reduce data to 2D (or 3D) so that it can be plotted.
+
+		Preventing overfitting: Reduce the number of features (in a supervised learning problem), so that there are fewer parameters to learn.

@@ -1,0 +1,214 @@
+---------------------------------------------------------
+Week - 10
+---------------------------------------------------------
+Learning with large Datasets
+---------------------------------------------------------
+Have m = 100 million
+
+Question
+	Suppose you are facing a supervised learning problem and have a large dataset (m = 100,000,000). How can you tell if using all of the data is likely to perform much better than using a small subset of the data (say m = 1,000)?
+
+		Plot a learning curve for a range of values of m and verify that the algorithm has high variance when m is small.
+
+	The learning curve and big gap (high variance) then makes sense to use large dataset
+
+---------------------------------------------------------
+Stochastic Gradient Descent
+---------------------------------------------------------
+Problem with gradient descent with large n is the derivative becomes expensive
+theta_j = theta_j + alpha * 1/m sum(h_theta xi - yi)xj -> batch gradient desent
+with batch need to load all values into memory for one step
+
+Stochastic is a little different
+cost(theta,(xi,yi)) = 1/2 (h_theta(xi) - yi) ^2 -> can be done in isolation
+now training becomes
+J_train = 1/m sum(cost function: above)
+
+Procedure
+1. randomly shuffle dataset
+2. repeat {
+	
+	for i=1,...m{
+		theta_j = theta_j -alpha (h_theta xi - yi xj)
+		for(j=0,..., n)
+	}
+}
+looks at each training example
+It is somewhat chaotic. 
+It converges around the global minimum
+
+Question
+	Which of the following statements about stochastic gradient descent are true?
+		-> When the training set size m is very large, stochastic gradient descent can be much faster than gradient descent
+		-> The cost function should go down with every iteration of batch gradient descent but not necessarily with stochastic gradient descent
+		-> Before beginning the main loop of stochastic gradient descent, it is a good idea to shuffle your training data into a random order
+
+---------------------------------------------------------
+Mini-Batch gradient descent
+---------------------------------------------------------
+Use batches b of size m
+Is good if have vectorization and little bit better that stochastic
+Downside is need an extra parameter b
+
+Question
+	Suppose you use mini-batch gradient descent on a training set of size m and you use a mini-batch size of b. The algorithm becomes the same as batch gradient descent if:
+		b = m
+
+---------------------------------------------------------
+Stochastic Gradient Descent Convergence
+---------------------------------------------------------
+Plot average over x examples
+	smaller learning rate means smaller oscillations
+	decreasing exmaples will shown a smoother curve
+What is have flat curve
+	-> may just need to deal with noise
+What is curve is going up?
+	-> divergence usually means need to use small alpha
+
+Question
+	Which of the following statements about stochastic gradient descent are true?
+		-> If we reduce the learning rate alpha, its possible that we may find a set of better parameters than with larger alpha
+		-> if we plost cost(theta, (xi, yi)) (averaged over the last 1000 examples) and stochastic gradient descent does not seem to be reducing the cost, one possible problem may be that the learning rate alpha is poorly tuned.
+
+---------------------------------------------------------
+Online Learning
+---------------------------------------------------------
+Learning from a continuous stream of data
+Question
+	Some of the advantages of using an online learning algorithm are:
+		-> It can adapt to changing user tastes (ie if p(y|x;theta) changes over time)
+		-> It allows us to learn from a continuous stream of data, since we use each example once then no longer need to process it again.
+
+---------------------------------------------------------
+Map Reduce and Data Parallelism
+---------------------------------------------------------
+batches can be broken up and passed to seperate machines to calc the batch
+
+Can it be expressed as a sum of functions
+
+Question
+	Suppose you apply the map-reduce method to train a neural network on ten machines. In each iteration, what will each of the machines do?
+
+	Compute the forward propagation adn back propagation on 1/10 of the data to compute the derivative with respect to that 1/10 of the data
+
+Quiz
+1.
+	 Suppose you are training a logistic regression classifier using stochastic gradient descent. You find that the cost (say, cost(θ,(x(i),y(i))), averaged over the last 500 examples), plotted as a function of the number of iterations, is slowly increasing over time. Which of the following changes are likely to help?
+
+		This is not possible with stochastic gradient descent, as it is guaranteed to converge to the optimal parameters θ.
+
+		Use fewer examples from your training set.
+
+		Try averaging the cost over a smaller number of examples (say 250 examples instead of 500) in the plot.
+
+		->Try halving (decreasing) the learning rate α, and see if that causes the cost to now consistently go down; and if not, keep halving it until it does.
+2. X
+	 Which of the following statements about stochastic gradient
+	descent are true? Check all that apply.
+
+		->In order to make sure stochastic gradient descent is converging, we typically compute Jtrain(θ) after each iteration (and plot it) in order to make sure that the cost function is generally decreasing.
+
+		->Before running stochastic gradient descent, you should randomly shuffle (reorder) the training set.
+
+		Suppose you are using stochastic gradient descent to train a linear regression classifier. The cost function J(θ)=12m∑i=1m(hθ(x(i))−y(i))2 is guaranteed to decrease after every iteration of the stochastic gradient descent algorithm.
+
+		You can use the method of numerical gradient checking to verify that your stochastic gradient descent implementation is bug-free. (One step of stochastic gradient descent computes the partial derivative ∂∂θjcost(θ,(x(i),y(i))).)  
+
+3.
+	 Which of the following statements about online learning are true? Check all that apply.
+
+		->Online learning algorithms are usually best suited to problems were we have a continuous/non-stop stream of data that we want to learn from.
+
+		Online learning algorithms are most appropriate when we have a fixed training set of size m that we want to train on.
+
+		->One of the advantages of online learning is that if the function we're modeling changes over time (such as if we are modeling the probability of users clicking on different URLs, and user tastes/preferences are changing over time), the online learning algorithm will automatically adapt to these changes.
+
+		When using online learning, you must save every new training example you get, as you will need to reuse past examples to re-train the model even after you get new training examples in the future. 
+
+4.
+	 Assuming that you have a very large training set, which of the
+	following algorithms do you think can be parallelized using
+	map-reduce and splitting the training set across different
+	machines? Check all that apply.
+
+		Linear regression trained using stochastic gradient descent.
+
+		Logistic regression trained using stochastic gradient descent.
+
+		->Logistic regression trained using batch gradient descent.
+
+		->Computing the average of all the features in your training set μ=1m∑i=1mx(i) (say in order to perform mean normalization). 
+
+5. X
+ Which of the following statements about map-reduce are true? Check all that apply.
+
+	->Because of network latency and other overhead associated with map-reduce, if we run map-reduce using N computers, we might get less than an N-fold speedup compared to using 1 computer.
+
+	If we run map-reduce using N computers, then we will always get at least an N-fold speedup compared to using 1 computer.
+
+	->When using map-reduce with gradient descent, we usually use a single machine that accumulates the gradients from each of the map-reduce machines, in order to compute the parameter update for that iteration.
+
+	If you have only 1 computer with 1 computing core, then map-reduce is unlikely to help. 
+
+Attempt 2
+	1. same as above
+	2. X
+	  Which of the following statements about stochastic gradient descent are true? Check all that apply.
+
+			->In order to make sure stochastic gradient descent is converging, we typically compute Jtrain(θ) after each iteration (and plot it) in order to make sure that the cost function is generally decreasing.
+
+			->Before running stochastic gradient descent, you should randomly shuffle (reorder) the training set.
+
+			->You can use the method of numerical gradient checking to verify that your stochastic gradient descent implementation is bug-free. (One step of stochastic gradient descent computes the partial derivative ∂∂θjcost(θ,(x(i),y(i))).)
+
+			Suppose you are using stochastic gradient descent to train a linear regression classifier. The cost function J(θ)=12m∑i=1m(hθ(x(i))−y(i))2 is guaranteed to decrease after every iteration of the stochastic gradient descent algorithm. 
+	3. Same as above
+	4.
+		Assuming that you have a very large training set, which of the
+		following algorithms do you think can be parallelized using
+		map-reduce and splitting the training set across different
+		machines? Check all that apply.
+
+			An online learning setting, where you repeatedly get a single example (x,y), and want to learn from that single example before moving on.
+
+			->Linear regression trained using batch gradient descent.
+
+			Logistic regression trained using stochastic gradient descent.
+
+			->A neural network trained using batch gradient descent. 
+	5. X
+		 Which of the following statements about map-reduce are true? Check all that apply.
+
+			Linear regression and logistic regression can be parallelized using map-reduce, but not neural network training.
+
+			->Because of network latency and other overhead associated with map-reduce, if we run map-reduce using N computers, we might get less than an N-fold speedup compared to using 1 computer.
+
+			If you have only 1 computer with 1 computing core, then map-reduce is unlikely to help.
+
+			->When using map-reduce with gradient descent, we usually use a single machine that accumulates the gradients from each of the map-reduce machines, in order to compute the parameter update for that iteration. 
+Attempt 3 - all right
+1. Same as above
+2.
+ Which of the following statements about stochastic gradient
+
+descent are true? Check all that apply.
+
+	Stochastic gradient descent is particularly well suited to problems with small training set sizes; in these problems, stochastic gradient descent is often preferred to batch gradient descent.
+
+	->One of the advantages of stochastic gradient descent is that it can start progress in improving the parameters θ after looking at just a single training example; in contrast, batch gradient descent needs to take a pass over the entire training set before it starts to make progress in improving the parameters' values.
+
+	->In each iteration of stochastic gradient descent, the algorithm needs to examine/use only one training example.
+
+	Suppose you are using stochastic gradient descent to train a linear regression classifier. The cost function J(θ)=12m∑i=1m(hθ(x(i))−y(i))2 is guaranteed to decrease after every iteration of the stochastic gradient descent algorithm. 
+3. Same as above
+4. Same as above
+5.
+ Which of the following statements about map-reduce are true? Check all that apply.
+
+	Linear regression and logistic regression can be parallelized using map-reduce, but not neural network training.
+
+	->If you have only 1 computer with 1 computing core, then map-reduce is unlikely to help.
+
+	->Because of network latency and other overhead associated with map-reduce, if we run map-reduce using N computers, we might get less than an N-fold speedup compared to using 1 computer.
+
+	->When using map-reduce with gradient descent, we usually use a single machine that accumulates the gradients from each of the map-reduce machines, in order to compute the parameter update for that iteration. 
